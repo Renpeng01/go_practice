@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	subSlice()
+	SliceCopy()
 }
 
 // https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-array-and-slice/
@@ -21,4 +21,24 @@ func subSlice() {
 
 	sub[0] = 10
 	fmt.Printf("change sub slice: %+v, origin slice: %+v\n", sub, s)
+
+}
+
+type E struct {
+	Val int
+}
+
+func SliceCopy() {
+	a := make([]*E, 0, 1)
+	a = append(a, &E{
+		Val: 1,
+	})
+
+	b := make([]*E, 10) // 这里的len不能是0
+
+	copy(b, a)
+	fmt.Printf("origin a: %+v, b: %+v\n", a[0].Val, b[0].Val)
+
+	b[0].Val = 2
+	fmt.Printf("change a: %+v, b: %+v\n", a[0].Val, b[0].Val)
 }
