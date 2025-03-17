@@ -49,5 +49,4 @@ func main() {
 	slice[0] = 0
 	fmt.Println("arr: ", arr)
 	fmt.Println("slice: ", slice)
-
 }
