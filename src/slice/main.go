@@ -45,6 +45,7 @@ func main() {
 	arr := [3]int{1, 2, 3}
 	slice := arr[:]
 	// 使用数组初始化另一个数组后，通过index改变元素，会源数组相同位置的元素
+	// 使用下标初始化切片不会拷贝原数组或者原切片中的数据，只会创建一个指向原数组的切片结构体，修改新切片的数据也会修改原切片
 	slice[0] = 0
 	fmt.Println("arr: ", arr)
 	fmt.Println("slice: ", slice)
