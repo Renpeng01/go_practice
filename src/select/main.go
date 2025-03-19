@@ -13,12 +13,13 @@ func main() {
 			time.Sleep(3 * time.Second)
 		}
 	}()
-	var ch chan int
+	// var ch chan int
 
+	ch := make(chan int, 10)
 	select {
-	case <-ch:
+	case ch <- 1:
 		fmt.Println("<-ch")
-	default:
-		fmt.Println("exec default")
+		// default:
+		// 	fmt.Println("exec default")
 	}
 }
