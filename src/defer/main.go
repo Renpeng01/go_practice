@@ -8,9 +8,9 @@ func main() {
 }
 
 func A() (a int) {
-	// defermt.Println("a: ", a)  二者效果不同
+	defer fmt.Println("a1: ", a) // 二者输出不同
 	defer func() {
-		fmt.Println("a: ", a)
+		fmt.Println("a2: ", a)
 	}()
 	a = 1
 
