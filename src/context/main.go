@@ -8,12 +8,12 @@ import (
 
 // 模拟一个耗时的任务
 func longRunningTask(ctx context.Context) (string, error) {
-	select {
-	case <-time.After(1 * time.Second): // 模拟任务耗时 5 秒
-		return "Task completed!", nil
-	case <-ctx.Done(): // 如果 context 被取消或超时
-		return "", ctx.Err() // 返回 context 的错误
-	}
+	// select {
+	// case <-time.After(1 * time.Second): // 模拟任务耗时 5 秒
+	// 	return "Task completed!", nil
+	// case <-ctx.Done(): // 如果 context 被取消或超时
+	// 	return "", ctx.Err() // 返回 context 的错误
+	// }
 }
 
 func main() {
