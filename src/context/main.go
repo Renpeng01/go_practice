@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"time"
 )
 
 // // 模拟一个耗时的任务
@@ -31,9 +32,20 @@ import (
 // }
 
 func main() {
-	ctx, canel := context.WithCancel(context.Background())
-	// defer canel() ctx.Err() 为nil
-	canel() // ctx.Err() 为 context canceled
+	ctx, cancel := context.WithCancel(context.Background())
+	// defer cancel() ctx.Err() 为nil
+	cancel() // ctx.Err() 为 context canceled
 
 	fmt.Println("ctx.Err(): ", ctx.Err())
+
+	now := time.Now()
+	d := now.Add(5 * time.Minute)
+	nCtx, deadlineCancel := context.WithDeadline(context.Background(), d)
+	defer deadlineCancel()
+	fmt.Println("now: ", now.Unix(), " d: ", d.Unix())
+
+	deadline, ok := nCtx.Deadline()
+	if ok {
+		fmt.Println("deadline: ", deadline.Unix())
+	}
 }
