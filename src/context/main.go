@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"time"
 )
@@ -31,21 +30,42 @@ import (
 // 	fmt.Println(result) // 输出任务结果
 // }
 
+// func main() {
+// 	ctx, cancel := context.WithCancel(context.Background())
+// 	// defer cancel() ctx.Err() 为nil
+// 	cancel() // ctx.Err() 为 context canceled
+
+// 	fmt.Println("ctx.Err(): ", ctx.Err())
+
+// 	now := time.Now()
+// 	d := now.Add(5 * time.Minute)
+// 	nCtx, deadlineCancel := context.WithDeadline(context.Background(), d)
+// 	defer deadlineCancel()
+// 	fmt.Println("now: ", now.Unix(), " d: ", d.Unix())
+
+// 	deadline, ok := nCtx.Deadline()
+// 	if ok {
+// 		fmt.Println("deadline: ", deadline.Unix())
+// 	}
+// }
+
+func Done() <-chan struct{} {
+	return nil
+}
+
 func main() {
-	ctx, cancel := context.WithCancel(context.Background())
-	// defer cancel() ctx.Err() 为nil
-	cancel() // ctx.Err() 为 context canceled
+	fmt.Println("test start")
 
-	fmt.Println("ctx.Err(): ", ctx.Err())
+	go func() {
+		fmt.Println("in select")
+		select {
+		case <-Done():
+			fmt.Println("nil chan")
+		}
+	}()
 
-	now := time.Now()
-	d := now.Add(5 * time.Minute)
-	nCtx, deadlineCancel := context.WithDeadline(context.Background(), d)
-	defer deadlineCancel()
-	fmt.Println("now: ", now.Unix(), " d: ", d.Unix())
+	time.Sleep(5 * time.Second)
 
-	deadline, ok := nCtx.Deadline()
-	if ok {
-		fmt.Println("deadline: ", deadline.Unix())
-	}
+	fmt.Println("test end")
+
 }
